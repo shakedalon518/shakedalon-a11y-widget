@@ -453,17 +453,22 @@
       clearFeatureCSS('tts-selection');
     }
 
-    // Large cursors (48x48 for better visibility) - skip on touch devices
-    var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-    if (state.largeBlackCursor && !isTouchDevice) {
-      const blackCursorCss = '*' + EX + '{cursor:url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M3 3l12 30 4.5-12 12-4.5z" fill="black" stroke="white" stroke-width="1.5"/></svg>\') 3 3,auto!important}';
+    // Large cursors (48x48, base64 encoded for cross-browser support)
+    if (state.largeBlackCursor) {
+      setFeatureCSS('largewhitecursor', '');
+      clearFeatureCSS('largewhitecursor');
+      state.largeWhiteCursor = false;
+      var blackCursorCss = 'html' + EX + ',body' + EX + ',a' + EX + ',button' + EX + ',div' + EX + ',span' + EX + ',p' + EX + ',img' + EX + ',section' + EX + ',header' + EX + ',footer' + EX + ',nav' + EX + ',main' + EX + ',article' + EX + ',li' + EX + ',ul' + EX + ',ol' + EX + '{cursor:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PHBhdGggZD0iTTMgM2wxMiAzMCA0LjUtMTIgMTItNC41eiIgZmlsbD0iYmxhY2siIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMS41Ii8+PC9zdmc+) 3 3,auto!important}';
       setFeatureCSS('largeblackcursor', blackCursorCss);
     } else {
       clearFeatureCSS('largeblackcursor');
     }
 
-    if (state.largeWhiteCursor && !isTouchDevice) {
-      const whiteCursorCss = '*' + EX + '{cursor:url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path d="M3 3l12 30 4.5-12 12-4.5z" fill="white" stroke="black" stroke-width="2"/></svg>\') 3 3,auto!important}';
+    if (state.largeWhiteCursor) {
+      setFeatureCSS('largeblackcursor', '');
+      clearFeatureCSS('largeblackcursor');
+      state.largeBlackCursor = false;
+      var whiteCursorCss = 'html' + EX + ',body' + EX + ',a' + EX + ',button' + EX + ',div' + EX + ',span' + EX + ',p' + EX + ',img' + EX + ',section' + EX + ',header' + EX + ',footer' + EX + ',nav' + EX + ',main' + EX + ',article' + EX + ',li' + EX + ',ul' + EX + ',ol' + EX + '{cursor:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PHBhdGggZD0iTTMgM2wxMiAzMCA0LjUtMTIgMTItNC41eiIgZmlsbD0id2hpdGUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==) 3 3,auto!important}';
       setFeatureCSS('largewhitecursor', whiteCursorCss);
     } else {
       clearFeatureCSS('largewhitecursor');
